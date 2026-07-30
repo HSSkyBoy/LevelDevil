@@ -103,3 +103,328 @@ MonoBehaviour:
     legacyMapIndex: 17
     legacyLevel: 18
     mapPrefab: {fileID: 2980900893763592176, guid: 5cb13cdf77d3784489ee792b7b4d0551, type: 3}
+  levelEntries:
+  - id: level-map-001-001
+    displayName: Map 1 / Level 1
+    difficulty: 0
+    prefab: {fileID: -8132541311023869924, guid: ebe6637f37fcee04aa632975492b2305, type: 3}
+  - id: level-map-001-002
+    displayName: Map 1 / Level 2
+    difficulty: 0
+    prefab: {fileID: -6056315322592274622, guid: d6104afbb4e979f479ef3284597d8168, type: 3}
+  - id: level-map-001-003
+    displayName: Map 1 / Level 3
+    difficulty: 0
+    prefab: {fileID: 6696606415103869462, guid: 31fe13783e2c2194f98906f35331e694, type: 3}
+  - id: level-map-001-004
+    displayName: Map 1 / Level 4
+    difficulty: 0
+    prefab: {fileID: 3726486517537591969, guid: d01f4c31ee1e69141a19e2ce199e2080, type: 3}
+  - id: level-map-001-005
+    displayName: Map 1 / Level 5
+    difficulty: 0
+    prefab: {fileID: 7783102934320197649, guid: c7a2124ff92a6aa4497019a0778c4294, type: 3}
+  - id: level-map-002-001
+    displayName: Map 2 / Level 1
+    difficulty: 0
+    prefab: {fileID: 3649195364756694213, guid: 5bb1ea2c54a12fd4abf309464400d1d6, type: 3}
+  - id: level-map-002-002
+    displayName: Map 2 / Level 2
+    difficulty: 0
+    prefab: {fileID: 5445134476312920821, guid: dadba159adb76df48a808da26921712c, type: 3}
+  - id: level-map-002-003
+    displayName: Map 2 / Level 3
+    difficulty: 0
+    prefab: {fileID: 2550268261416966945, guid: 7d53bac605ea02a408f744726ffaabf1, type: 3}
+  - id: level-map-002-004
+    displayName: Map 2 / Level 4
+    difficulty: 0
+    prefab: {fileID: 6216632291905059500, guid: 6c04e98c7b3adf2418ffc2dbacd5f617, type: 3}
+  - id: level-map-002-005
+    displayName: Map 2 / Level 5
+    difficulty: 0
+    prefab: {fileID: 6358186183643662790, guid: ff7977f70d5b2e343a77343c926b1b76, type: 3}
+  - id: level-map-003-001
+    displayName: Map 3 / Level 1
+    difficulty: 0
+    prefab: {fileID: 1050391073971956087, guid: d16aa9adab519d5479240049c59bc7fd, type: 3}
+  - id: level-map-003-002
+    displayName: Map 3 / Level 2
+    difficulty: 0
+    prefab: {fileID: 7732320920568606062, guid: 85dbe96c07ead624c9257649fc98baf2, type: 3}
+  - id: level-map-003-003
+    displayName: Map 3 / Level 3
+    difficulty: 0
+    prefab: {fileID: 7359192386268309352, guid: f5178fe02d08d724da7402b95ec03a54, type: 3}
+  - id: level-map-003-004
+    displayName: Map 3 / Level 4
+    difficulty: 0
+    prefab: {fileID: 2947524184024182652, guid: 2e7f79d20ab879f44b1d8c9030c82358, type: 3}
+  - id: level-map-003-005
+    displayName: Map 3 / Level 5
+    difficulty: 0
+    prefab: {fileID: 2181808357213167289, guid: a40e8bc3b72ad374abf985091c08ab62, type: 3}
+  - id: level-map-004-001
+    displayName: Map 4 / Level 1
+    difficulty: 0
+    prefab: {fileID: 7923038412332488496, guid: d1dd4c2afed869543b5ce4cda2fa9b5f, type: 3}
+  - id: level-map-004-002
+    displayName: Map 4 / Level 2
+    difficulty: 0
+    prefab: {fileID: 8435205901352365883, guid: da018524d19ffb64788aa513aa59a73f, type: 3}
+  - id: level-map-004-003
+    displayName: Map 4 / Level 3
+    difficulty: 0
+    prefab: {fileID: 5735268608964210151, guid: b46eb418b5c8dc3438d6115de44f2bdf, type: 3}
+  - id: level-map-004-004
+    displayName: Map 4 / Level 4
+    difficulty: 0
+    prefab: {fileID: 242889343947879847, guid: 1b17d4003ccbc4d4e828c19ca1b7ed34, type: 3}
+  - id: level-map-004-005
+    displayName: Map 4 / Level 5
+    difficulty: 0
+    prefab: {fileID: 1333270907467557810, guid: a6295aae9206e7942b6672ac89ce91b8, type: 3}
+  - id: level-map-005-001
+    displayName: Map 5 / Level 1
+    difficulty: 0
+    prefab: {fileID: 1511817682222332206, guid: 40f6c18795aff0f4eacd135bc1feeed6, type: 3}
+  - id: level-map-005-002
+    displayName: Map 5 / Level 2
+    difficulty: 0
+    prefab: {fileID: 7487191187862705310, guid: ea6fa94e3b0b4954e919dfabbcd8034b, type: 3}
+  - id: level-map-005-003
+    displayName: Map 5 / Level 3
+    difficulty: 0
+    prefab: {fileID: 5367399405343590642, guid: 3bbcee034a91ebe418451585501399fd, type: 3}
+  - id: level-map-005-004
+    displayName: Map 5 / Level 4
+    difficulty: 0
+    prefab: {fileID: 8094555813934976936, guid: b8eb23e5f1a900c4e8e7b38648730b74, type: 3}
+  - id: level-map-005-005
+    displayName: Map 5 / Level 5
+    difficulty: 0
+    prefab: {fileID: 3881640241604327341, guid: 6ebd5b45ad16bd64d91563ad8944ad86, type: 3}
+  - id: level-map-006-001
+    displayName: Map 6 / Level 1
+    difficulty: 0
+    prefab: {fileID: 4066349010025412474, guid: be97fcc040a2be64d842a8f7c624476c, type: 3}
+  - id: level-map-006-002
+    displayName: Map 6 / Level 2
+    difficulty: 0
+    prefab: {fileID: 4153125702375332514, guid: 876f09650239b864cbda9a89c3722e50, type: 3}
+  - id: level-map-006-003
+    displayName: Map 6 / Level 3
+    difficulty: 0
+    prefab: {fileID: 8384600302256385896, guid: 0d9851a48a0a8f24381066ed751ac857, type: 3}
+  - id: level-map-006-004
+    displayName: Map 6 / Level 4
+    difficulty: 0
+    prefab: {fileID: 5048821947251696739, guid: 7e1780f89d0667d4787f05e7b96dfb63, type: 3}
+  - id: level-map-006-005
+    displayName: Map 6 / Level 5
+    difficulty: 0
+    prefab: {fileID: 3506942696396239163, guid: d6a4f03824aa2a54d9886027241fd72e, type: 3}
+  - id: level-map-007-001
+    displayName: Map 7 / Level 1
+    difficulty: 0
+    prefab: {fileID: 3394814322778040653, guid: 2159eacf90805fa48b664c791de0b7ce, type: 3}
+  - id: level-map-007-002
+    displayName: Map 7 / Level 2
+    difficulty: 0
+    prefab: {fileID: 1113734937469925038, guid: 43460d404777f664da8150f707d2d65d, type: 3}
+  - id: level-map-007-003
+    displayName: Map 7 / Level 3
+    difficulty: 0
+    prefab: {fileID: 5497120330136768168, guid: 9861398dfcb70a84fabbca5e7438cfe2, type: 3}
+  - id: level-map-007-004
+    displayName: Map 7 / Level 4
+    difficulty: 0
+    prefab: {fileID: 3878619646913030855, guid: 3db8581131814f4429ae1c2f3854bee5, type: 3}
+  - id: level-map-007-005
+    displayName: Map 7 / Level 5
+    difficulty: 0
+    prefab: {fileID: 7385399231233325237, guid: 64ce4bfa292f314418f4005e748af239, type: 3}
+  - id: level-map-008-001
+    displayName: Map 8 / Level 1
+    difficulty: 0
+    prefab: {fileID: 1678799520246156289, guid: 0e37b3bd72e08ee40a8bc67918ea197b, type: 3}
+  - id: level-map-008-002
+    displayName: Map 8 / Level 2
+    difficulty: 0
+    prefab: {fileID: 4412095128833778013, guid: 28e54d494867e114d915114bf2e76b3a, type: 3}
+  - id: level-map-008-003
+    displayName: Map 8 / Level 3
+    difficulty: 0
+    prefab: {fileID: 6790040358013328535, guid: 86427f1e53d1ec44e8952d1c5619b1c3, type: 3}
+  - id: level-map-008-004
+    displayName: Map 8 / Level 4
+    difficulty: 0
+    prefab: {fileID: 2565630256715711049, guid: cc63425fb727f6a48b86ed9d475cc2c5, type: 3}
+  - id: level-map-008-005
+    displayName: Map 8 / Level 5
+    difficulty: 0
+    prefab: {fileID: 7973523303011529757, guid: 0bb17a22c93eec3499a7fe15081a4436, type: 3}
+  - id: level-map-009-001
+    displayName: Map 9 / Level 1
+    difficulty: 0
+    prefab: {fileID: 6955466152362732453, guid: 3bae057412fc5f84a8fb2159f9ca38d4, type: 3}
+  - id: level-map-009-002
+    displayName: Map 9 / Level 2
+    difficulty: 0
+    prefab: {fileID: 106782205778534465, guid: 5da00c082fc7fa546ae3b99b775765ec, type: 3}
+  - id: level-map-009-003
+    displayName: Map 9 / Level 3
+    difficulty: 0
+    prefab: {fileID: 7222422001711595321, guid: 538824bf63dbe2b489948db6600ad070, type: 3}
+  - id: level-map-009-004
+    displayName: Map 9 / Level 4
+    difficulty: 0
+    prefab: {fileID: 8231325843430452493, guid: bf95bc6ce27e74a40889aa29ebf9cbf0, type: 3}
+  - id: level-map-009-005
+    displayName: Map 9 / Level 5
+    difficulty: 0
+    prefab: {fileID: 5501255960770300338, guid: 4e822141a3b88a647b42e66cb29517b6, type: 3}
+  - id: level-map-010-001
+    displayName: Map 10 / Level 1
+    difficulty: 0
+    prefab: {fileID: 3096684950879549537, guid: c8df781d599ac7c43aa89d891061c481, type: 3}
+  - id: level-map-010-002
+    displayName: Map 10 / Level 2
+    difficulty: 0
+    prefab: {fileID: 6674442009271919432, guid: 378aa4de4ae18a74e92b0b4f9dae8599, type: 3}
+  - id: level-map-010-003
+    displayName: Map 10 / Level 3
+    difficulty: 0
+    prefab: {fileID: 6011034724962403621, guid: 47fb5b43d19cb8340befa5cd77e311e4, type: 3}
+  - id: level-map-010-004
+    displayName: Map 10 / Level 4
+    difficulty: 0
+    prefab: {fileID: 4862920141056640804, guid: 009d82bdcae211d44bfbae6dc6e041d2, type: 3}
+  - id: level-map-010-005
+    displayName: Map 10 / Level 5
+    difficulty: 0
+    prefab: {fileID: 1700456652896380319, guid: 4649acc38f3adfc46b42fb1fa40bcdcc, type: 3}
+  - id: level-map-011-001
+    displayName: Map 11 / Level 1
+    difficulty: 0
+    prefab: {fileID: 5543607231955891955, guid: 4b78ae6e9763175488dfc379b127eb5b, type: 3}
+  - id: level-map-011-002
+    displayName: Map 11 / Level 2
+    difficulty: 0
+    prefab: {fileID: 5056018632600513879, guid: 731759ba13181704098d33faef86ef25, type: 3}
+  - id: level-map-011-003
+    displayName: Map 11 / Level 3
+    difficulty: 0
+    prefab: {fileID: 2569346490159747291, guid: b66f5ca2eb6536449a6547b39a29bcc4, type: 3}
+  - id: level-map-011-004
+    displayName: Map 11 / Level 4
+    difficulty: 0
+    prefab: {fileID: 4318972957779612351, guid: 632f3bd5ea195ff44808e3f3e5c9be61, type: 3}
+  - id: level-map-011-005
+    displayName: Map 11 / Level 5
+    difficulty: 0
+    prefab: {fileID: 4407457508340316498, guid: 927b200136d839c4fa26c9513a2425e9, type: 3}
+  - id: level-map-012-001
+    displayName: Map 12 / Level 1
+    difficulty: 0
+    prefab: {fileID: 1993556863771029677, guid: 5d5e284613b455e42b4eb183e2311b1f, type: 3}
+  - id: level-map-012-002
+    displayName: Map 12 / Level 2
+    difficulty: 0
+    prefab: {fileID: 1180304621448352651, guid: a449db4b1303d48468b763ba212e13e5, type: 3}
+  - id: level-map-012-003
+    displayName: Map 12 / Level 3
+    difficulty: 0
+    prefab: {fileID: 8302770134184015332, guid: f492959abf391db42933166abb2774ec, type: 3}
+  - id: level-map-012-004
+    displayName: Map 12 / Level 4
+    difficulty: 0
+    prefab: {fileID: 2332154253321112523, guid: 78119afc6178c6e4aa21d7c34e2caef2, type: 3}
+  - id: level-map-012-005
+    displayName: Map 12 / Level 5
+    difficulty: 0
+    prefab: {fileID: 3017743708419110435, guid: 86b5d583184288b4faf7083f8471b08a, type: 3}
+  - id: level-map-013-001
+    displayName: Map 13 / Level 1
+    difficulty: 0
+    prefab: {fileID: 7637846453064423301, guid: f3391b2e0dfd4cf4d87ec716cd9e7ab6, type: 3}
+  - id: level-map-013-002
+    displayName: Map 13 / Level 2
+    difficulty: 0
+    prefab: {fileID: 5783637585481067515, guid: 9b1458c5e3ca7a945952a7e9cfe18fe0, type: 3}
+  - id: level-map-013-003
+    displayName: Map 13 / Level 3
+    difficulty: 0
+    prefab: {fileID: 236452551082334500, guid: 5eb7d179e3d80bb488cb215e9665b7df, type: 3}
+  - id: level-map-013-004
+    displayName: Map 13 / Level 4
+    difficulty: 0
+    prefab: {fileID: 741263778200403820, guid: 9512713bdc0f7fd40bf06634ed9608ba, type: 3}
+  - id: level-map-013-005
+    displayName: Map 13 / Level 5
+    difficulty: 0
+    prefab: {fileID: 9113800363316648596, guid: 0d90967dd4eb5fc4aa66bd29c0baeac3, type: 3}
+  - id: level-map-014-001
+    displayName: Map 14 / Level 1
+    difficulty: 0
+    prefab: {fileID: 8582054610766647689, guid: 16651dcf6af0d134eb8900624df4930a, type: 3}
+  - id: level-map-014-002
+    displayName: Map 14 / Level 2
+    difficulty: 0
+    prefab: {fileID: 8801038187164351228, guid: 278788ef14dad8c459263aae82844a13, type: 3}
+  - id: level-map-014-003
+    displayName: Map 14 / Level 3
+    difficulty: 0
+    prefab: {fileID: 1197964562850481249, guid: 26ec837495553bc46a0de156a66f75d2, type: 3}
+  - id: level-map-014-004
+    displayName: Map 14 / Level 4
+    difficulty: 0
+    prefab: {fileID: 2147483307966879099, guid: 9ed0cebac7418b8428bf0935048ffe49, type: 3}
+  - id: level-map-014-005
+    displayName: Map 14 / Level 5
+    difficulty: 0
+    prefab: {fileID: 5630733490557421410, guid: 177e79ddce983054aa945bec9b55d8a7, type: 3}
+  - id: level-map-015-001
+    displayName: Map 15 / Level 1
+    difficulty: 0
+    prefab: {fileID: 142949382267437725, guid: cff93f8823b9828448384652f02dc129, type: 3}
+  - id: level-map-015-002
+    displayName: Map 15 / Level 2
+    difficulty: 0
+    prefab: {fileID: 3828334031119207637, guid: eb157a8f989ea744dbd231bc705cfd94, type: 3}
+  - id: level-map-015-003
+    displayName: Map 15 / Level 3
+    difficulty: 0
+    prefab: {fileID: 6677899089953075328, guid: a0267bb33012cea4094dc58477d0aae2, type: 3}
+  - id: level-map-015-004
+    displayName: Map 15 / Level 4
+    difficulty: 0
+    prefab: {fileID: 1139973935666137075, guid: be9bcb7761f6df0479c352779c823b5f, type: 3}
+  - id: level-map-015-005
+    displayName: Map 15 / Level 5
+    difficulty: 0
+    prefab: {fileID: 2319757503965731476, guid: 2f978f6eda5f6bf4da05a0fd80d3f8be, type: 3}
+  - id: level-map-016-001
+    displayName: Map 16 / Level 1
+    difficulty: 0
+    prefab: {fileID: 4403068054537275335, guid: 67e511f2f79871146b052c09837f8ce3, type: 3}
+  - id: level-map-016-002
+    displayName: Map 16 / Level 2
+    difficulty: 0
+    prefab: {fileID: 2230351711790240941, guid: 81b129d7c2c8a6a41a2c3b515fd9e7fd, type: 3}
+  - id: level-map-016-003
+    displayName: Map 16 / Level 3
+    difficulty: 0
+    prefab: {fileID: 1806951770219814658, guid: db1b600da336fce4493d224b5c77f08e, type: 3}
+  - id: level-map-016-004
+    displayName: Map 16 / Level 4
+    difficulty: 0
+    prefab: {fileID: 6536220979258721795, guid: 3d6d4f9840a3dc94ab232947933186f7, type: 3}
+  - id: level-map-016-005
+    displayName: Map 16 / Level 5
+    difficulty: 0
+    prefab: {fileID: 4200676106867647465, guid: 4dd97e9e225ad3849b261f984ca03cda, type: 3}
+  - id: level-map-017-001
+    displayName: Map 17 / Level 1
+    difficulty: 0
+    prefab: {fileID: 45083394870113956, guid: 0be1423f819df35408e5f3b6b07eb88e, type: 3}

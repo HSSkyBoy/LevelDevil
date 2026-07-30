@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -119,6 +120,8 @@ public class LevelCatalogValidatorWindow : EditorWindow
             ValidateMap(entry, label, levelOwners);
         }
 
+        ValidateLevelEntries(levelOwners);
+
         ValidateLegacyMapSO(highestLegacyIndex);
 
         if (!HasErrors())
@@ -166,16 +169,161 @@ public class LevelCatalogValidatorWindow : EditorWindow
                 levelOwners.Add(level, label + " levelList[" + i + "]");
             }
 
+            ValidateLevelPrefab(level, label + " levelList[" + i + "]");
+        }
+    }
+
+    private void ValidateLevelEntries(Dictionary<Level, string> legacyLevelOwners)
+    {
+        if (catalog.LevelEntryCount == 0)
+        {
+            AddWarning("The catalog has no Level entries. Legacy Map levelList loading remains available, but new Level authoring cannot use catalog metadata yet.");
+            return;
+        }
+
+        HashSet<string> ids = new HashSet<string>();
+        Dictionary<Level, string> catalogOwners = new Dictionary<Level, string>();
+        for (int i = 0; i < catalog.LevelEntries.Count; i++)
+        {
+            LevelDefinition entry = catalog.LevelEntries[i];
+            string label = "Level entry " + i;
+            if (entry == null)
+            {
+                AddError(label + " is null.");
+                continue;
+            }
+
+            if (string.IsNullOrWhiteSpace(entry.Id))
+            {
+                AddError(label + " has an empty unique Level ID.");
+            }
+            else if (!ids.Add(entry.Id))
+            {
+                AddError(label + " duplicates unique Level ID '" + entry.Id + "'.");
+            }
+
+            if (string.IsNullOrWhiteSpace(entry.DisplayName))
+            {
+                AddWarning(label + " has an empty display name.");
+            }
+
+            if (entry.Prefab == null)
+            {
+                AddError(label + " has no Level Prefab reference.");
+                continue;
+            }
+
+            string previousOwner;
+            if (catalogOwners.TryGetValue(entry.Prefab, out previousOwner))
+            {
+                AddWarning(label + " references " + entry.Prefab.name + ", which is also used by " + previousOwner + ".");
+            }
+            else
+            {
+                catalogOwners.Add(entry.Prefab, label);
+            }
+
+            if (!legacyLevelOwners.ContainsKey(entry.Prefab))
+            {
+                AddWarning(label + " (" + entry.Prefab.name + ") is not assigned to a legacy Map levelList. It is catalog-only and will not appear in the existing 18 Map flow until explicitly authored into a Map.");
+            }
+
+            ValidateLevelPrefab(entry.Prefab, label);
+        }
+    }
+
+    private void ValidateLevelPrefab(Level level, string label)
+    {
+        LevelTemplateDefinition template = level.GetComponent<LevelTemplateDefinition>();
+        if (template != null)
+        {
+            ValidateTemplateStructure(template, label);
+        }
+        else
+        {
             if (level.GetComponentsInChildren<Gate>(true).Length == 0)
             {
-                AddWarning(label + " levelList[" + i + "] (" + level.name + ") has no Gate component.");
+                AddWarning(label + " (" + level.name + ") has no Gate component.");
             }
 
             if (level.GetComponentsInChildren<PlayerCtrl>(true).Length == 0)
             {
-                AddWarning(label + " levelList[" + i + "] (" + level.name + ") has no PlayerCtrl component.");
+                AddWarning(label + " (" + level.name + ") has no PlayerCtrl component. Legacy levels may provide the Player through another runtime path.");
             }
         }
+
+        ValidateTrapReferences(level, label);
+    }
+
+    private void ValidateTemplateStructure(LevelTemplateDefinition template, string label)
+    {
+        if (template.PlayerSpawn == null)
+        {
+            AddError(label + " template is missing its PlayerSpawn reference.");
+        }
+        else if (template.PlayerSpawn.name != "PlayerSpawn")
+        {
+            AddWarning(label + " template PlayerSpawn should be named 'PlayerSpawn'.");
+        }
+
+        if (template.Gate == null)
+        {
+            AddError(label + " template is missing its Gate reference.");
+        }
+        else if (template.Gate.GetComponent<Collider2D>() == null)
+        {
+            AddError(label + " template Gate has no Collider2D.");
+        }
+
+        if (template.CameraBounds == null)
+        {
+            AddError(label + " template is missing its CameraBounds Collider2D reference.");
+        }
+        else if (template.CameraBounds.name != "CameraBounds")
+        {
+            AddWarning(label + " template CameraBounds should be named 'CameraBounds'.");
+        }
+    }
+
+    private void ValidateTrapReferences(Level level, string label)
+    {
+        MonoBehaviour[] behaviours = level.GetComponentsInChildren<MonoBehaviour>(true);
+        for (int i = 0; i < behaviours.Length; i++)
+        {
+            MonoBehaviour behaviour = behaviours[i];
+            if (behaviour == null || !IsTrapBehaviour(behaviour))
+            {
+                continue;
+            }
+
+            SerializedObject serializedBehaviour = new SerializedObject(behaviour);
+            SerializedProperty property = serializedBehaviour.GetIterator();
+            bool enterChildren = true;
+            while (property.NextVisible(enterChildren))
+            {
+                enterChildren = true;
+                if (property.propertyPath == "m_Script" || property.propertyType != SerializedPropertyType.ObjectReference)
+                {
+                    continue;
+                }
+
+                if (property.objectReferenceValue == null && property.objectReferenceInstanceIDValue != 0)
+                {
+                    AddError(label + " trap '" + behaviour.name + "' has a missing reference at " + property.displayName + ".");
+                }
+            }
+        }
+    }
+
+    private static bool IsTrapBehaviour(MonoBehaviour behaviour)
+    {
+        Type type = behaviour.GetType();
+        return type == typeof(ActiveWave) || type == typeof(BoxColliderMNG) || type == typeof(ChangeMoveType)
+            || type == typeof(ConveyorBelt) || type == typeof(DropablePlatform) || type == typeof(FlappyButton)
+            || type == typeof(MoveWithDelay) || type == typeof(MovingObj) || type == typeof(MovingPlat)
+            || type == typeof(Portal) || type == typeof(RotateY) || type == typeof(Saw)
+            || type == typeof(ScaleButton) || type == typeof(ScaleOtherObj) || type == typeof(SetActiveGOBJ)
+            || type == typeof(SetParenPlayer) || type == typeof(StepByStepMover) || type == typeof(Spring);
     }
 
     private void ValidateLegacyMapSO(int highestLegacyIndex)

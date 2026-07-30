@@ -26,16 +26,44 @@ public class LevelCatalogPlayModeTests
         System.Type managerType = levelManager.GetType();
         MethodInfo getMapCount = managerType.GetMethod("GetMapCount");
         MethodInfo loadMapById = managerType.GetMethod("LoadMapByID");
+        MethodInfo loadPreviewLevel = managerType.GetMethod("LoadPreviewLevel");
         MethodInfo despawnMap = managerType.GetMethod("DespawnMap");
         FieldInfo activeMapField = managerType.GetField("mapScr");
+        FieldInfo catalogField = managerType.GetField("levelCatalog");
 
         Assert.IsNotNull(getMapCount);
         Assert.IsNotNull(loadMapById);
+        Assert.IsNotNull(loadPreviewLevel);
         Assert.IsNotNull(despawnMap);
         Assert.IsNotNull(activeMapField);
+        Assert.IsNotNull(catalogField);
 
         int mapCount = (int)getMapCount.Invoke(levelManager, null);
         Assert.AreEqual(18, mapCount, "The existing catalog must expose all 18 Maps.");
+
+        object catalog = catalogField.GetValue(levelManager);
+        Assert.IsNotNull(catalog, "SampleScene LevelManager must keep its assigned LevelCatalog.");
+        PropertyInfo catalogLevels = catalog.GetType().GetProperty("LevelEntries");
+        Assert.IsNotNull(catalogLevels, "LevelCatalog must expose Level-level metadata.");
+        IList catalogLevelEntries = catalogLevels.GetValue(catalog) as IList;
+        Assert.IsNotNull(catalogLevelEntries);
+        Assert.AreEqual(81, catalogLevelEntries.Count, "The catalog must contain one metadata entry for every unique legacy Level Prefab.");
+
+        HashSet<string> catalogLevelIds = new HashSet<string>();
+        for (int levelEntryIndex = 0; levelEntryIndex < catalogLevelEntries.Count; levelEntryIndex++)
+        {
+            object catalogLevelEntry = catalogLevelEntries[levelEntryIndex];
+            Assert.IsNotNull(catalogLevelEntry);
+
+            System.Type entryType = catalogLevelEntry.GetType();
+            string id = entryType.GetProperty("Id").GetValue(catalogLevelEntry) as string;
+            string displayName = entryType.GetProperty("DisplayName").GetValue(catalogLevelEntry) as string;
+            Object prefab = entryType.GetProperty("Prefab").GetValue(catalogLevelEntry) as Object;
+            Assert.IsFalse(string.IsNullOrWhiteSpace(id), "Catalog Level entry has no ID at index " + levelEntryIndex + ".");
+            Assert.IsTrue(catalogLevelIds.Add(id), "Catalog Level ID is not unique: " + id);
+            Assert.IsFalse(string.IsNullOrWhiteSpace(displayName), "Catalog Level entry has no display name at index " + levelEntryIndex + ".");
+            Assert.IsNotNull(prefab, "Catalog Level entry has no Prefab at index " + levelEntryIndex + ".");
+        }
 
         HashSet<Object> uniqueLevelPrefabs = new HashSet<Object>();
         for (int mapIndex = 0; mapIndex < mapCount; mapIndex++)
@@ -78,5 +106,19 @@ public class LevelCatalogPlayModeTests
         }
 
         Assert.AreEqual(81, uniqueLevelPrefabs.Count, "The 18 Map definitions should retain the 81 original Level Prefabs.");
+
+        Object previewPrefab = null;
+        foreach (Object levelPrefab in uniqueLevelPrefabs)
+        {
+            previewPrefab = levelPrefab;
+            break;
+        }
+
+        loadPreviewLevel.Invoke(levelManager, new object[] { previewPrefab });
+        Component previewMap = activeMapField.GetValue(levelManager) as Component;
+        Assert.IsNotNull(previewMap, "Quick preview did not create a fallback Map shell.");
+        Assert.IsNotNull(previewMap.GetType().GetField("level").GetValue(previewMap), "Quick preview did not load the selected Level.");
+        despawnMap.Invoke(levelManager, null);
+        yield return null;
     }
 }

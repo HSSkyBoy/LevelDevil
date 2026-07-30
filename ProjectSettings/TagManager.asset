@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - PlayerSpawn
+  - CameraBounds
   layers:
   - Default
   - TransparentFX

@@ -77,6 +77,36 @@ public class LevelManager : MonoBehaviour
         curMaplList.Add(mapScr);
     }
 
+    /// <summary>
+    /// Editor preview hook. It reuses the normal Map runtime shell but substitutes one
+    /// Level only for the current Play Mode session; catalog and legacy map loading are untouched.
+    /// </summary>
+    public void LoadPreviewLevel(Level levelPrefab)
+    {
+        if (levelPrefab == null)
+        {
+            Debug.LogError("Unable to preview a null Level Prefab.");
+            return;
+        }
+
+        if (mapScr != null)
+        {
+            DespawnMap();
+        }
+
+        Map previewMapPrefab = GetMapPrefab(0);
+        if (previewMapPrefab == null)
+        {
+            Debug.LogError("Unable to start Level preview because no fallback Map is available.");
+            return;
+        }
+
+        mapScr = SimplePool.Spawn<Map>(previewMapPrefab);
+        mapScr.levelList = new List<Level> { levelPrefab };
+        mapScr.ResetState();
+        curMaplList.Add(mapScr);
+    }
+
     private Map GetMapPrefab(int id)
     {
         LevelEntry catalogEntry;
