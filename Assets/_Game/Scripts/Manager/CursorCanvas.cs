@@ -6,6 +6,17 @@ public class CursorCanvas : UICanvas
 {
     public RectTransform cursorImage;
 
+#if UNITY_ANDROID && !UNITY_EDITOR
+    private void Awake()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public override void Open()
+    {
+        gameObject.SetActive(false);
+    }
+#else
     private void Start()
     {
         Cursor.visible = false;
@@ -23,4 +34,5 @@ public class CursorCanvas : UICanvas
         );
         cursorImage.localPosition = cursorPos;
     }
+#endif
 }

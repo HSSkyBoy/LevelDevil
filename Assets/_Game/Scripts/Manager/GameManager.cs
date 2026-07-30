@@ -18,7 +18,7 @@ public class GameManager : Singleton<GameManager>
     {
         DOTween.SetTweensCapacity(500, 50);
         //base.Awake();
-        Input.multiTouchEnabled = false;
+        Input.multiTouchEnabled = true;
         Application.targetFrameRate = 60;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
