@@ -6,6 +6,9 @@ using UnityEngine;
 public class MapSO : ScriptableObject
 {
     public List<MapDetails> mapList = new List<MapDetails>();
+    [SerializeField] private LevelCatalog levelCatalog;
+
+    public LevelCatalog LevelCatalog => levelCatalog;
 
 
     [System.Serializable]
@@ -17,6 +20,8 @@ public class MapSO : ScriptableObject
 
     public void LoadWinStates()
     {
+        EnsureEntriesForCatalog(null);
+
         for (int i = 0; i < mapList.Count; i++)
         {
             string key = "MapWin_" + i;
@@ -27,6 +32,34 @@ public class MapSO : ScriptableObject
             else
             {
                 mapList[i].isWon = false;
+            }
+        }
+    }
+
+    public void EnsureEntriesForCatalog(LevelCatalog catalog)
+    {
+        LevelCatalog activeCatalog = catalog != null ? catalog : levelCatalog;
+        if (activeCatalog == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < activeCatalog.Entries.Count; i++)
+        {
+            LevelEntry entry = activeCatalog.Entries[i];
+            if (entry == null || entry.LegacyMapIndex < 0)
+            {
+                continue;
+            }
+
+            while (mapList.Count <= entry.LegacyMapIndex)
+            {
+                mapList.Add(new MapDetails());
+            }
+
+            if (mapList[entry.LegacyMapIndex].eLevel == ELevel.None && entry.LegacyLevel != ELevel.None)
+            {
+                mapList[entry.LegacyMapIndex].eLevel = entry.LegacyLevel;
             }
         }
     }

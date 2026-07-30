@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e1aafe417da3b4685b9ecad09fd413, type: 3}
   m_Name: MapSO
   m_EditorClassIdentifier: 
+  levelCatalog: {fileID: 11400000, guid: 35d9c34ef9b54c50b4bdcd603fdc817a, type: 2}
   mapList:
   - eLevel: 1
     isWon: 1

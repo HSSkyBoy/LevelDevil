@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5602695cfde2402c9eb7281f7de442e2, type: 3}
+  m_Name: LevelCatalog
+  m_EditorClassIdentifier: 
+  entries:
+  - id: map-001
+    displayName: Map 1
+    legacyMapIndex: 0
+    legacyLevel: 1
+    mapPrefab: {fileID: 6069246703499115155, guid: a87ebda5f7867bf46996d31c34b47dd2, type: 3}
+  - id: map-002
+    displayName: Map 2
+    legacyMapIndex: 1
+    legacyLevel: 2
+    mapPrefab: {fileID: 7525670865411006271, guid: 4d82008d4c626774297394d79f3217b1, type: 3}
+  - id: map-003
+    displayName: Map 3
+    legacyMapIndex: 2
+    legacyLevel: 3
+    mapPrefab: {fileID: 1122435246789759878, guid: e0d67f1e54171a14cbd45c0e5257811b, type: 3}
+  - id: map-004
+    displayName: Map 4
+    legacyMapIndex: 3
+    legacyLevel: 4
+    mapPrefab: {fileID: 1122435246789759878, guid: 4040b1d1905f2964c8d26d332966efa7, type: 3}
+  - id: map-005
+    displayName: Map 5
+    legacyMapIndex: 4
+    legacyLevel: 5
+    mapPrefab: {fileID: 7198954797581062951, guid: 4581d6423bb02d143afcd28cf04a9d85, type: 3}
+  - id: map-006
+    displayName: Map 6
+    legacyMapIndex: 5
+    legacyLevel: 6
+    mapPrefab: {fileID: 488320512394173509, guid: 0db663a3ea8126248942f933ac4c6705, type: 3}
+  - id: map-007
+    displayName: Map 7
+    legacyMapIndex: 6
+    legacyLevel: 7
+    mapPrefab: {fileID: 863472535645907837, guid: b8d490312540ccc4cbdaba478ec0e8ec, type: 3}
+  - id: map-008
+    displayName: Map 8
+    legacyMapIndex: 7
+    legacyLevel: 8
+    mapPrefab: {fileID: 189573622424952692, guid: 43ffcfc86210cf145b5e647b8739531d, type: 3}
+  - id: map-009
+    displayName: Map 9
+    legacyMapIndex: 8
+    legacyLevel: 9
+    mapPrefab: {fileID: 6456154346307921383, guid: 58e5f4b970d3a554ab98ebea034fb878, type: 3}
+  - id: map-010
+    displayName: Map 10
+    legacyMapIndex: 9
+    legacyLevel: 10
+    mapPrefab: {fileID: 366477043497596224, guid: 50405ced709e4d24a8656ee9e39b16e1, type: 3}
+  - id: map-011
+    displayName: Map 11
+    legacyMapIndex: 10
+    legacyLevel: 11
+    mapPrefab: {fileID: 560364082302853850, guid: 9c61d34249395c142ab293d14494f280, type: 3}
+  - id: map-012
+    displayName: Map 12
+    legacyMapIndex: 11
+    legacyLevel: 12
+    mapPrefab: {fileID: 2868303826289747571, guid: 93f39513590d915498498a0f88d1d2e4, type: 3}
+  - id: map-013
+    displayName: Map 13
+    legacyMapIndex: 12
+    legacyLevel: 13
+    mapPrefab: {fileID: 4480967714701613427, guid: a7ba88dbd8a5c3e46ab5db6b99768ac2, type: 3}
+  - id: map-014
+    displayName: Map 14
+    legacyMapIndex: 13
+    legacyLevel: 14
+    mapPrefab: {fileID: 7429656546926209589, guid: e45e9956972ec2b4c93d133a919dafe1, type: 3}
+  - id: map-015
+    displayName: Map 15
+    legacyMapIndex: 14
+    legacyLevel: 15
+    mapPrefab: {fileID: 6855740576743099225, guid: b4936e2b20ba96d4b8ddb2e055e2d213, type: 3}
+  - id: map-016
+    displayName: Map 16
+    legacyMapIndex: 15
+    legacyLevel: 16
+    mapPrefab: {fileID: 2414813679674506859, guid: b656f3800e49d7a4ebe2eadd390e02fa, type: 3}
+  - id: map-017
+    displayName: Map 17
+    legacyMapIndex: 16
+    legacyLevel: 17
+    mapPrefab: {fileID: 3005501457211531291, guid: 306d639998cac754d8c7e93f78b1cd47, type: 3}
+  - id: map-018
+    displayName: Map 18
+    legacyMapIndex: 17
+    legacyLevel: 18
+    mapPrefab: {fileID: 2980900893763592176, guid: 5cb13cdf77d3784489ee792b7b4d0551, type: 3}

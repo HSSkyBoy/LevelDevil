@@ -9,6 +9,8 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Ins => ins;
 
     public List<Map> mapList;
+    [Header("Level Catalog (Preferred)")]
+    public LevelCatalog levelCatalog;
     public Map mapScr;
     public int curMap;
     public MapSO mapSO;
@@ -28,7 +30,21 @@ public class LevelManager : MonoBehaviour
     public void OnInit()
     {
         curMap = PlayerPrefs.GetInt("CurrentMap", 0);
+        if (mapSO != null)
+        {
+            mapSO.EnsureEntriesForCatalog(levelCatalog);
+        }
         mapSO.LoadWinStates();
+    }
+
+    public int GetMapCount()
+    {
+        if (levelCatalog != null && levelCatalog.EntryCount > 0)
+        {
+            return levelCatalog.EntryCount;
+        }
+
+        return mapList != null ? mapList.Count : 0;
     }
 
     public void ResetWinStates()
@@ -49,16 +65,40 @@ public class LevelManager : MonoBehaviour
             DespawnMap();
         }
 
+        Map mapPrefab = GetMapPrefab(id);
+        if (mapPrefab == null)
+        {
+            Debug.LogError("Unable to load Map with legacy index " + id + ".");
+            return;
+        }
+
+        mapScr = SimplePool.Spawn<Map>(mapPrefab);
+        mapScr.ResetState();
+        curMaplList.Add(mapScr);
+    }
+
+    private Map GetMapPrefab(int id)
+    {
+        LevelEntry catalogEntry;
+        if (levelCatalog != null && levelCatalog.TryGetByLegacyMapIndex(id, out catalogEntry))
+        {
+            return catalogEntry.MapPrefab;
+        }
+
+        if (mapList == null || id < 0 || id >= mapList.Count)
+        {
+            return null;
+        }
+
         foreach (Map map in mapList)
         {
-            if (map.id == id)
+            if (map != null && map.id == id)
             {
-               /* mapScr = Instantiate(mapList[curMap], transform);*/
-                mapScr = SimplePool.Spawn<Map>(mapList[id]);
-                mapScr.ResetState();
-                curMaplList.Add(mapScr);
+                return mapList[id];
             }
         }
+
+        return null;
     }
 
     public void DespawnMap()

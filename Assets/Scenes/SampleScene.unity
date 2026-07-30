@@ -618,6 +618,7 @@ MonoBehaviour:
   - {fileID: 2414813679674506859, guid: b656f3800e49d7a4ebe2eadd390e02fa, type: 3}
   - {fileID: 3005501457211531291, guid: 306d639998cac754d8c7e93f78b1cd47, type: 3}
   - {fileID: 2980900893763592176, guid: 5cb13cdf77d3784489ee792b7b4d0551, type: 3}
+  levelCatalog: {fileID: 11400000, guid: 35d9c34ef9b54c50b4bdcd603fdc817a, type: 2}
   mapScr: {fileID: 0}
   curMap: 0
   mapSO: {fileID: 11400000, guid: c3b749ed85e8e4c479912a5ea1a59481, type: 2}

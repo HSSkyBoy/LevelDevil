@@ -13,7 +13,8 @@ public class SelectLevelUI : UICanvas
 
     public void LoadGate()
     {
-        gateNum = LevelManager.Ins.curMap + 1;
+        int availableGateCount = Mathf.Min(listGOBJ.Length, LevelManager.Ins.GetMapCount());
+        gateNum = Mathf.Clamp(LevelManager.Ins.curMap + 1, 0, availableGateCount);
         Debug.Log(gateNum);
 
         for (int i = 0; i < gateNum; i++)
