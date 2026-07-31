@@ -13,7 +13,7 @@ public class AddForce : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        if (LevelDevilInput.JumpPressed && canJump)
         {
             Jump();
             SoundFXMNG.Ins.PlaySFX(SoundFXMNG.Ins.walltrap);
@@ -24,7 +24,7 @@ public class AddForce : MonoBehaviour
             // Apply extra downward force for a faster fall
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        else if (rb.velocity.y > 0 && !LevelDevilInput.JumpHeld)
         {
             // Apply less upward force for a shorter jump when the player releases the jump button early
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;

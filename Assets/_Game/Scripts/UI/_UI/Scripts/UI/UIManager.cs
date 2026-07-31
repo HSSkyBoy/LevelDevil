@@ -161,7 +161,7 @@ public class UIManager : Singleton<UIManager>
 
     private void LateUpdate()
     {
-        if (Input.GetKey(KeyCode.Escape) && BackTopUI != null)
+        if (LevelDevilInput.BackPressed && BackTopUI != null)
         {
             BackActionEvents[BackTopUI]?.Invoke();
         }

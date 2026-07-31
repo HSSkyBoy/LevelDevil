@@ -166,7 +166,7 @@ public class LevelManager : MonoBehaviour
 
         while (true)
         {
-            if (Input.anyKeyDown)
+            if (LevelDevilInput.RestartPressed)
             {
                 Debug.Log("Phím được nhấn, load level...");
                 mapScr.LoadLevel(); // Gọi load level

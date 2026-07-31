@@ -16,18 +16,18 @@ public class ConveyorBelt : MonoBehaviour
     {
         if (playerRb != null)
         {
-            if (Input.GetKeyDown(KeyCode.D))
+            if (LevelDevilInput.Move > 0)
             {
                 direction = Vector3.right;
             }
-            else if (Input.GetKeyDown(KeyCode.A))
+            else if (LevelDevilInput.Move < 0)
             {
                 direction = Vector3.left;
             }
 
             playerRb.velocity = new Vector2(speed * direction.x, playerRb.velocity.y);
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (LevelDevilInput.JumpPressed)
             {
                 playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce);
                 p.playerMovement.ChangeAnim(CacheString.TAG_ISRUNNING, true);

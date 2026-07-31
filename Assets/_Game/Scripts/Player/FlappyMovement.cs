@@ -17,7 +17,7 @@ public class FlappyMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (LevelDevilInput.JumpPressed)
         {
             rb.velocity = new Vector2(speed, strength);
             ChangeAnim(CacheString.TAG_ISRUNNING, true);

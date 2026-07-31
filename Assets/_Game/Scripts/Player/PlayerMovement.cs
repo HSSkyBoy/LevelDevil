@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move(EControlType eControlType)
     {
-        dirX = Input.GetAxisRaw("Horizontal");
+        dirX = LevelDevilInput.Move;
 
         switch(eControlType)
         {
@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
 
         ChangeAnim("IsRunning", dirX != 0 ? true : false);
 
-        if (Input.GetButtonDown("Jump") && IsGrounded() && canJump)
+        if (LevelDevilInput.JumpPressed && IsGrounded() && canJump)
         {
             Jump();
             SoundFXMNG.Ins.PlaySFX(SoundFXMNG.Ins.jump);

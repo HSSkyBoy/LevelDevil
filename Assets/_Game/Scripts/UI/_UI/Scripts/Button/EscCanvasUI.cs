@@ -23,7 +23,7 @@ public class EscCanvasUI : UICanvas
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Escape) && isInteractable)
+        if (LevelDevilInput.BackPressed && isInteractable)
         {
             EscFunc();
             isInteractable = false;
