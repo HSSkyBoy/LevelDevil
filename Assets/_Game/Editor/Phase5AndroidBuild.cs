@@ -8,9 +8,24 @@ using UnityEngine;
 public static class Phase5AndroidBuild
 {
     private const string ApkRelativePath = "Builds/Android/LevelDevil-Phase5-Development.apk";
+    private const string ReleaseApkRelativePath = "Builds/Android/LevelDevil-Release.apk";
+    private const string LocalJdkRelativePath = "Library/Phase5Tools/jdk11/jdk-11.0.32+9";
+    private const string LocalSdkRelativePath = "Library/Phase5Tools/android-sdk";
+    private const string LocalNdkRelativePath = "Library/Phase5Tools/ndk-r23-unity";
 
     [MenuItem("Tools/LevelDevil/Android/Build Phase 5 Development APK")]
     public static void BuildDevelopmentApk()
+    {
+        BuildApk(ApkRelativePath, BuildOptions.Development | BuildOptions.AllowDebugging, "Development");
+    }
+
+    [MenuItem("Tools/LevelDevil/Android/Build Release APK")]
+    public static void BuildReleaseApk()
+    {
+        BuildApk(ReleaseApkRelativePath, BuildOptions.None, "Release");
+    }
+
+    private static void BuildApk(string apkRelativePath, BuildOptions buildOptions, string buildLabel)
     {
         ConfigureAndroidPlayer();
 
@@ -25,7 +40,7 @@ public static class Phase5AndroidBuild
             throw new BuildFailedException("No enabled scenes are configured for the Android build.");
         }
 
-        string outputPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), ApkRelativePath));
+        string outputPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), apkRelativePath));
         Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
 
         BuildPlayerOptions options = new BuildPlayerOptions
@@ -34,7 +49,7 @@ public static class Phase5AndroidBuild
             locationPathName = outputPath,
             target = BuildTarget.Android,
             targetGroup = BuildTargetGroup.Android,
-            options = BuildOptions.Development | BuildOptions.AllowDebugging
+            options = buildOptions
         };
 
         Phase5GradleCompatibility.EnableCompileSdk35Workaround();
@@ -50,12 +65,12 @@ public static class Phase5AndroidBuild
         if (report.summary.result != BuildResult.Succeeded)
         {
             throw new BuildFailedException(
-                "Phase 5 Android build failed: " + report.summary.result +
+                buildLabel + " Android build failed: " + report.summary.result +
                 " (" + report.summary.totalErrors + " errors)");
         }
 
         Debug.Log(
-            "Phase 5 Development APK built: " + outputPath +
+            buildLabel + " APK built: " + outputPath +
             " (" + report.summary.totalSize + " bytes)");
     }
 
@@ -89,10 +104,20 @@ public static class Phase5AndroidBuild
         string sdkRoot = Environment.GetEnvironmentVariable("ANDROID_HOME");
         string ndkRoot = Environment.GetEnvironmentVariable("LEVELDEVIL_NDK_ROOT");
 
+        // Editor menu builds do not inherit the shell environment used by CI.
+        // Fall back to the project-local Phase 5 tool facade in that case.
+        string projectRoot = Directory.GetParent(Application.dataPath).FullName;
+        jdkRoot = ResolveToolRoot(jdkRoot, Path.Combine(projectRoot, LocalJdkRelativePath), "bin/java.exe");
+        sdkRoot = ResolveToolRoot(sdkRoot, Path.Combine(projectRoot, LocalSdkRelativePath), "platform-tools/adb.exe");
+        ndkRoot = ResolveToolRoot(ndkRoot, Path.Combine(projectRoot, LocalNdkRelativePath), "source.properties");
+
         if (!string.IsNullOrEmpty(jdkRoot))
         {
+            Environment.SetEnvironmentVariable("JAVA_HOME", jdkRoot);
+            Environment.SetEnvironmentVariable("PATH", Path.Combine(jdkRoot, "bin") + ";" + Environment.GetEnvironmentVariable("PATH"));
             EditorPrefs.SetBool("JdkUseEmbedded", false);
             EditorPrefs.SetString("JdkPath", jdkRoot);
+            EditorPrefs.SetString("JdkRoot", jdkRoot);
         }
 
         if (!string.IsNullOrEmpty(sdkRoot))
@@ -117,5 +142,15 @@ public static class Phase5AndroidBuild
         }
 
         Debug.Log($"Configured External Android Tools - JDK: '{jdkRoot}', SDK: '{sdkRoot}', NDK: '{ndkRoot}'");
+    }
+
+    private static string ResolveToolRoot(string configured, string fallback, string requiredRelativeFile)
+    {
+        if (!string.IsNullOrEmpty(configured) && File.Exists(Path.Combine(configured, requiredRelativeFile)))
+        {
+            return configured;
+        }
+
+        return File.Exists(Path.Combine(fallback, requiredRelativeFile)) ? fallback : configured;
     }
 }
