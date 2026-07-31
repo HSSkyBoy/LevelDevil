@@ -22,12 +22,11 @@ public class GameManager : Singleton<GameManager>
         Application.targetFrameRate = 60;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
-        int maxScreenHeight = 1280;
-        float ratio = (float)Screen.currentResolution.width / (float)Screen.currentResolution.height;
-        if (Screen.currentResolution.height > maxScreenHeight)
-        {
-            Screen.SetResolution(Mathf.RoundToInt(ratio * (float)maxScreenHeight), maxScreenHeight, true);
-        }
+        // Android owns the surface size.  Forcing a lower fullscreen resolution here
+        // made the render target, the world canvas, and overlay UI disagree about the
+        // display dimensions on high-density and ultra-wide devices.  It also caused
+        // a surface reconfiguration immediately after startup.  Keep the native
+        // surface and let the canvases/camera adapt to its actual aspect ratio.
 
         //csv.OnInit();
         //userData?.OnInitData();

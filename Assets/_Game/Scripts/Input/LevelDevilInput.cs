@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -12,6 +13,8 @@ public static class LevelDevilInput
     private static int jumpPressedFrame = -1;
     private static int jumpReleasedFrame = -1;
     private static int pointerPressedFrame = -1;
+    private static readonly Dictionary<int, MobileControlAction> mobileControls =
+        new Dictionary<int, MobileControlAction>();
 
     public static int Move
     {
@@ -90,6 +93,90 @@ public static class LevelDevilInput
         }
     }
 
+    /// <summary>
+    /// Associates a finger with its current on-screen control. A finger can move
+    /// between the left and right buttons without being lifted.
+    /// </summary>
+    public static void SetMobileControl(int pointerId, MobileControlAction action)
+    {
+        mobileControls[pointerId] = action;
+        ApplyMobileControlState();
+    }
+
+    public static void ReleaseMobileControl(int pointerId)
+    {
+        if (mobileControls.Remove(pointerId))
+        {
+            ApplyMobileControlState();
+        }
+    }
+
+    public static void ReleaseMobileControls(MobileControlAction action)
+    {
+        List<int> releasedPointers = null;
+        foreach (KeyValuePair<int, MobileControlAction> control in mobileControls)
+        {
+            if (control.Value == action)
+            {
+                if (releasedPointers == null)
+                {
+                    releasedPointers = new List<int>();
+                }
+
+                releasedPointers.Add(control.Key);
+            }
+        }
+
+        if (releasedPointers == null)
+        {
+            return;
+        }
+
+        foreach (int pointerId in releasedPointers)
+        {
+            mobileControls.Remove(pointerId);
+        }
+
+        ApplyMobileControlState();
+    }
+
+    private static void ApplyMobileControlState()
+    {
+        bool wasJumpHeld = jumpHeld;
+        leftHeld = false;
+        rightHeld = false;
+        jumpHeld = false;
+
+        foreach (MobileControlAction action in mobileControls.Values)
+        {
+            switch (action)
+            {
+                case MobileControlAction.Left:
+                    leftHeld = true;
+                    break;
+                case MobileControlAction.Right:
+                    rightHeld = true;
+                    break;
+                case MobileControlAction.Jump:
+                    jumpHeld = true;
+                    break;
+            }
+        }
+
+        if (jumpHeld != wasJumpHeld)
+        {
+            if (jumpHeld)
+            {
+                jumpPressedFrame = Time.frameCount;
+                NotifyPointerPressed();
+            }
+            else
+            {
+                jumpReleasedFrame = Time.frameCount;
+            }
+        }
+    }
+
     public static void NotifyPointerPressed()
     {
         pointerPressedFrame = Time.frameCount;
@@ -100,6 +187,7 @@ public static class LevelDevilInput
         leftHeld = false;
         rightHeld = false;
         jumpHeld = false;
+        mobileControls.Clear();
         jumpPressedFrame = -1;
         jumpReleasedFrame = -1;
         pointerPressedFrame = -1;

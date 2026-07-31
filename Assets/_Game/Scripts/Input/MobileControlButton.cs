@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,10 +8,11 @@ public enum MobileControlAction
     Jump
 }
 
-public sealed class MobileControlButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler
+public sealed class MobileControlButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    private readonly HashSet<int> activePointers = new HashSet<int>();
     private MobileControlAction action;
+
+    public MobileControlAction Action => action;
 
     public void Initialize(MobileControlAction controlAction)
     {
@@ -21,55 +21,38 @@ public sealed class MobileControlButton : MonoBehaviour, IPointerDownHandler, IP
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (activePointers.Add(eventData.pointerId))
-        {
-            LevelDevilInput.NotifyPointerPressed();
-            ApplyHeld(true);
-        }
+        LevelDevilInput.NotifyPointerPressed();
+        LevelDevilInput.SetMobileControl(eventData.pointerId, action);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        ReleasePointer(eventData.pointerId);
+        LevelDevilInput.ReleaseMobileControl(eventData.pointerId);
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnDrag(PointerEventData eventData)
     {
-        ReleasePointer(eventData.pointerId);
-    }
-
-    private void OnDisable()
-    {
-        activePointers.Clear();
-        ApplyHeld(false);
-    }
-
-    private void ReleasePointer(int pointerId)
-    {
-        if (!activePointers.Remove(pointerId))
+        if (action == MobileControlAction.Jump)
         {
             return;
         }
 
-        if (activePointers.Count == 0)
+        MobileControlButton target = eventData.pointerCurrentRaycast.gameObject == null
+            ? null
+            : eventData.pointerCurrentRaycast.gameObject.GetComponentInParent<MobileControlButton>();
+
+        if (target != null && target.action != MobileControlAction.Jump)
         {
-            ApplyHeld(false);
+            LevelDevilInput.SetMobileControl(eventData.pointerId, target.action);
+        }
+        else
+        {
+            LevelDevilInput.ReleaseMobileControl(eventData.pointerId);
         }
     }
 
-    private void ApplyHeld(bool held)
+    private void OnDisable()
     {
-        switch (action)
-        {
-            case MobileControlAction.Left:
-                LevelDevilInput.SetLeftHeld(held);
-                break;
-            case MobileControlAction.Right:
-                LevelDevilInput.SetRightHeld(held);
-                break;
-            case MobileControlAction.Jump:
-                LevelDevilInput.SetJumpHeld(held);
-                break;
-        }
+        LevelDevilInput.ReleaseMobileControls(action);
     }
 }
